@@ -1,0 +1,4 @@
+/backend/node_modules
+/backend/package-lock.json
+/frontend_game/node_modules
+/frontend_game/package-lock.json

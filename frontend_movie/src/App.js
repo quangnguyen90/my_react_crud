@@ -3,7 +3,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 import MoviePage from './containers/movie/MoviePage';
-import MovieForm from './containers/movie/MovieForm';
+import MovieCreate from './containers/movie/MovieCreate';
+import MovieEdit from './containers/movie/MovieEdit';
+import MovieDetail from './containers/movie/MovieDetail';
 
 class App extends Component {
   render() {
@@ -28,9 +30,10 @@ class App extends Component {
           </nav> <br/>
           <h2>Welcome to React CRUD Tutorial</h2> <br/>
           <Switch>
-              <Route exact path='/create' component={ MovieForm } />
-              <Route path='/edit/:id' component={ MovieForm } />
-              <Route path='/index' component={ MoviePage } />
+              <Route exact path='/index' component={ MoviePage } />
+              <Route path='/create' component={ MovieCreate } />
+              <Route path='/edit/:id' component={ MovieEdit } />
+              <Route path='/detail/:id' component={ MovieDetail } />
           </Switch>
         </div>
       </Router>

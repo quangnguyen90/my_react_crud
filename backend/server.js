@@ -18,7 +18,7 @@ function validate(data) {
 
 function validateMovies(data) {
     let errors = {};
-    if (data.name.trim() === '') errors.name = "Can't be empty";
+    if (data.title.trim() === '') errors.title = "Can't be empty";
     if (data.type.trim() === '') errors.type = "Can't be empty";
     if (data.year.trim() === '') errors.year = "Can't be empty";
     if (data.cover.trim() === '') errors.cover = "Can't be empty";
@@ -32,13 +32,15 @@ mongoose.connect(dbUrl, function(err, db){
     * 
     * Game APIs
     *
-    */ 
+    */
+    // Read
     app.get('/api/games', (req, res) => {
         db.collection('games').find({}).toArray((err, games) => {
             res.json(games);
         });
     })
 
+    // Create
     app.post('/api/games', (req, res) => {
         const { errors, isValid } = validate(req.body);
         if (isValid) {
@@ -55,12 +57,14 @@ mongoose.connect(dbUrl, function(err, db){
         }
     })
 
+    // Detal
     app.get('/api/games/:_id', (req, res) => {
         db.collection('games').findOne({ _id: new mongoose.Types.ObjectId(req.params._id) }, (err, game) => {
             res.json(game);
         })
     })
 
+    // Update
     app.put('/api/games/:_id', (req, res) => {
         const { errors, isValid } = validate(req.body);
 
@@ -81,6 +85,7 @@ mongoose.connect(dbUrl, function(err, db){
         }
     })
 
+    // Delete
     app.delete('/api/games/:_id', (req, res) => {
         console.log('id ', req.params._id);
         db.collection('games').deleteOne({ _id: new mongoose.Types.ObjectId(req.params._id) }, (err, r) => {
@@ -103,14 +108,14 @@ mongoose.connect(dbUrl, function(err, db){
 
     // Create 
     app.post('/api/movies', (req, res) => {
-        const { errors, isValid } = validate(req.body);
+        const { errors, isValid } = validateMovies(req.body);
         if (isValid) {
-            const { name, type, year, cover } = req.body;
-            db.collection('movies').insert({ name, type, year, cover }, (err, result) => {
+            const { title, type, year, cover } = req.body;
+            db.collection('movies').insert({ title, type, year, cover }, (err, result) => {
                 if (err) {
                     res.status(500).json({ errors: { global: 'Something went wrong ' } })
                 } else {
-                    res.json({ game: result.ops[0] })
+                    res.json({ movie: result.ops[0] })
                 }
             })
         } else {
@@ -127,18 +132,18 @@ mongoose.connect(dbUrl, function(err, db){
 
     // Update
     app.put('/api/movies/:_id', (req, res) => {
-        const { errors, isValid } = validate(req.body);
+        const { errors, isValid } = validateMovies(req.body);
 
         if (isValid) {
-            const { name, type, year, cover } = req.body;
+            const { title, type, year, cover } = req.body;
             db.collection('movies').findOneAndUpdate(
                 { _id: new mongoose.Types.ObjectId(req.params._id) },
-                { $set: { name, type, year, cover } },
+                { $set: { title, type, year, cover } },
                 { returnOriginal: false },
                 (err, result) => {
                     if (err) { res.status(500).json({ errors: { global: err } }); return }
                     
-                    res.json({ game: result.value });
+                    res.json({ movie: result.value });
                 }
             )
         } else {

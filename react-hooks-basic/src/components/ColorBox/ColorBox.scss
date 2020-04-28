@@ -1,0 +1,11 @@
+.color-box {
+    $box-size: 200px;
+
+    display: inline-block; // nhieu block hien thi chung 1 hang
+    width: $box-size;
+    height: $box-size;
+    border-radius: 8px;
+
+    transition: all 0.35s ease-in-out 0s; // de khi doi mau se muot ma them
+    cursor: pointer; // de khi nguoi dung hover con tro vao the div thi se biet la click duoc
+}

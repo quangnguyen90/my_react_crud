@@ -55,6 +55,7 @@ const renderHobbyList = (hobbyList) => {
 // III. RENDER INITIAL HOBBY LIST
 // Step 5: render data
 const initialHobbyList = store.getState();
+console.log(initialHobbyList);
 renderHobbyList(initialHobbyList);
 
 //----------------------------------------------------------
@@ -69,7 +70,9 @@ if (hobbyFormElement) {
         e.preventDefault();
         const hobbyTextElement = hobbyFormElement.querySelector('#hobbyText');
         if (!hobbyTextElement) return;
-        //Redux-flow-2: declare action with type & data 
+
+        console.log('SUBMIT', hobbyTextElement.value);
+        //Redux-flow-2: declare action with type & data
         const action = {
             type: 'ADD_HOBBY',
             payload: hobbyTextElement.value
@@ -87,8 +90,9 @@ if (hobbyFormElement) {
 //----------------------------------------------------------
 
 // Step 7: render updated list
-// Redux-flow-5: store return udpated state & render UI
+// Redux-flow-5: store return updated state & render UI
 store.subscribe(() => {
+    console.log('STATE UPDATE: ',store.getState())
     const newHobbyList = store.getState();
     renderHobbyList(newHobbyList);
 

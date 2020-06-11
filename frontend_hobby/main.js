@@ -93,9 +93,9 @@ if (hobbyFormElement) {
 // Redux-flow-5: store return updated state & render UI
 store.subscribe(() => {
     console.log('STATE UPDATE: ',store.getState());
-    // each time list is changed, render hobby list again
+    // each time list is changed, render hobby list again & save to local storage
     const newHobbyList = store.getState();
     renderHobbyList(newHobbyList);
-
+    // With local storage, hobby_list will not be lost if browser is refreshed
     localStorage.setItem('hobby_list', JSON.stringify(newHobbyList));
 });

@@ -72,15 +72,15 @@ if (hobbyFormElement) {
         if (!hobbyTextElement) return;
 
         console.log('SUBMIT', hobbyTextElement.value);
-        //Redux-flow-2: declare action with type & data
+        //Redux-flow-2: declare action with type & payload (data get from html text)
         const action = {
             type: 'ADD_HOBBY',
             payload: hobbyTextElement.value
         }
-        //Redux-flow-3: dispatch action to store
+        //Redux-flow-3: dispatch action to reducer of store
         store.dispatch(action);
 
-        //reset form
+        //reset form: remove text in html textbox
         hobbyFormElement.reset();
     }
 
@@ -92,7 +92,8 @@ if (hobbyFormElement) {
 // Step 7: render updated list
 // Redux-flow-5: store return updated state & render UI
 store.subscribe(() => {
-    console.log('STATE UPDATE: ',store.getState())
+    console.log('STATE UPDATE: ',store.getState());
+    // each time list is changed, render hobby list again
     const newHobbyList = store.getState();
     renderHobbyList(newHobbyList);
 

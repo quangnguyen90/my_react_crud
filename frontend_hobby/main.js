@@ -1,7 +1,7 @@
 console.log(window.Redux);
 const { createStore } = window.Redux;
 
-// Setup redux store
+// I. SETUP REDUX STORE
 // state
 // reducer
 // store
@@ -30,6 +30,7 @@ const store = createStore(hobbyReducer);
 
 //----------------------------------------------------------
 
+// II. RENDER REDUX HOBBY LIST
 // Step 4: create function to get data from initial state
 // get redux hobby list
 const renderHobbyList = (hobbyList) => {
@@ -51,13 +52,14 @@ const renderHobbyList = (hobbyList) => {
 
 //----------------------------------------------------------
 
-// Step 5: render data 
-// render Initial hobby list
+// III. RENDER INITIAL HOBBY LIST
+// Step 5: render data
 const initialHobbyList = store.getState();
 renderHobbyList(initialHobbyList);
 
 //----------------------------------------------------------
 
+// IV. HANDLE FORM SUBMIT
 // Step 6: create function to handle ACTION submit
 //Redux-flow-1: handle form submit
 const hobbyFormElement = document.querySelector('#hobbyForm');
@@ -84,7 +86,7 @@ if (hobbyFormElement) {
 
 //----------------------------------------------------------
 
-// Step 6: render updated list
+// Step 7: render updated list
 // Redux-flow-5: store return udpated state & render UI
 store.subscribe(() => {
     const newHobbyList = store.getState();

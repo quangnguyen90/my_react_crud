@@ -20,3 +20,8 @@
 3. Connect to redux store from components
 
 - Using the two hooks
+- Check files:
+  * src/App.js: Be careful when connecting redux from App.js. Each time state is changed, it will auto re-render app --> make website run slow. Only connect to redux with smart components
+  * pages/Homepage.jsx
+  * components/Home/HobbyList/index.jsx
+  * reducers/hobby
